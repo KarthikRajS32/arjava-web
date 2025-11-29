@@ -134,7 +134,7 @@ const Header = () => {
           id="mobile-menu"
           className="lg:hidden hidden mt-4 pb-4 border-t border-gray-200"
         >
-          <div className="flex flex-col space-y-1 pt-4">
+          <div className="flex flex-col text-center space-y-1 pt-4">
             <Link
               to="/"
               className={`px-4 py-2 transition-colors rounded-lg ${
@@ -179,7 +179,7 @@ const Header = () => {
               Projects
             </Link>
 
-            <Link
+            {/* <Link
               to="/privacy"
               className={`px-4 py-2 transition-colors rounded-lg ${
                 isActive("/privacy")
@@ -188,7 +188,7 @@ const Header = () => {
               }`}
             >
               Privacy
-            </Link>
+            </Link> */}
 
             <Link
               to="/contact"
