@@ -11,6 +11,9 @@ const Contact = () => {
     service: "",
     message: "",
   });
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     const revealElements = document.querySelectorAll('.reveal');
@@ -28,9 +31,43 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (response.ok) {
+        setPopupMessage('Message sent successfully!');
+        setIsSuccess(true);
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 3000);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+      } else {
+        setPopupMessage('Failed to send message. Please try again.');
+        setIsSuccess(false);
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 3000);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setPopupMessage('Failed to send message. Please try again.');
+      setIsSuccess(false);
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+    }
   };
 
   return (
@@ -107,7 +144,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
-                    Phone
+                    Phone Number
                   </label>
                   <input
                     type="tel"
@@ -258,6 +295,23 @@ const Contact = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* Popup Modal */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full mx-4 text-center">
+            <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${
+              isSuccess ? 'bg-green-100' : 'bg-red-100'
+            }`}>
+              <i className={`bi ${isSuccess ? 'bi-check-circle text-green-500' : 'bi-x-circle text-red-500'} text-2xl`}></i>
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              {isSuccess ? 'Success!' : 'Error!'}
+            </h3>
+            <p className="text-gray-600">{popupMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

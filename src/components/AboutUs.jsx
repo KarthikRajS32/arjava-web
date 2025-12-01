@@ -5,28 +5,6 @@ import Footer from "./Footer";
 
 const About = () => {
   useEffect(() => {
-    // Add external dependencies
-    const links = [
-      {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
-      },
-    ];
-
-    const script = document.createElement("script");
-    script.src = "https://cdn.tailwindcss.com";
-    document.head.appendChild(script);
-
-    links.forEach((linkData) => {
-      const link = document.createElement("link");
-      Object.assign(link, linkData);
-      document.head.appendChild(link);
-    });
-
     // Initialize intersection observer
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,13 +37,6 @@ const About = () => {
 
     return () => {
       observer.disconnect();
-      document.head.removeChild(script);
-      links.forEach(() => {
-        const linkElements = document.head.querySelectorAll(
-          'link[href*="bootstrap-icons"], link[href*="googleapis"]'
-        );
-        linkElements.forEach((link) => document.head.removeChild(link));
-      });
     };
   }, []);
 

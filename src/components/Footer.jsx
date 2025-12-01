@@ -1,11 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
-
+import { useEffect } from "react";
 
 export default function Footer() {
   const location = useLocation();
   const currentPath = location.pathname;
 
   const isActive = (path) => location.pathname === path;
+
+  useEffect(() => {
+    // Ensure consistent positioning after navigation
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <footer className="py-12 sm:py-16 lg:py-20 bg-gray-900 text-white">
@@ -26,24 +31,32 @@ export default function Footer() {
             <div className="flex space-x-3 sm:space-x-4">
               <a
                 href="#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors mr-[-1px] xl:mr-[-1px] md:mr-[-2px]"
               >
                 <i className="bi bi-facebook text-xs sm:text-sm lg:text-base"></i>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/arjavatech/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <i className="bi bi-instagram text-xs sm:text-sm lg:text-base"></i>
               </a>
               <a
                 href="#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <i className="bi bi-twitter text-xs sm:text-sm lg:text-base"></i>
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/arjavatech/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <i className="bi bi-linkedin text-xs sm:text-sm lg:text-base"></i>
@@ -178,7 +191,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 border-t border-gray-800 mt-6 sm:mt-8 lg:mt-12 pt-4 sm:pt-6 lg:pt-8 text-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 border-t border-gray-800 mt-8 sm:mt-12 lg:mt-16 pt-6 sm:pt-8 lg:pt-10 text-center">
           <p className="text-gray-400 text-xs sm:text-sm lg:text-base">
             ©2025 Arjava Technologies. All rights reserved.
           </p>

@@ -1,32 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
 const HomePage = () => {
+  const [serviceImages, setServiceImages] = useState([]);
+  const [portfolioProjects, setPortfolioProjects] = useState([]);
+
+  const cards = [
+    { title: "Web Development", description: "Modern, responsive websites and web applications built with cutting-edge technologies and best practices.", icon: "bi-laptop"},
+    { title: "Mobile Apps", description: "Native iOS and Android applications with exceptional user experience and performance optimization.", icon: "bi-phone"},
+    { title: "Cloud Solutions", description: "Scalable cloud infrastructure, migration services, and DevOps solutions for modern businesses.", icon: "bi-cloud"},
+    
+  ];
+
   useEffect(() => {
-    // Add external dependencies
-    const links = [
-      {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
-      },
-    ];
+    fetch('/api/services/images')
+      .then(res => res.json())
+      .then(setServiceImages)
+      .catch(console.error);
 
-    const script = document.createElement("script");
-    script.src = "https://cdn.tailwindcss.com";
-    document.head.appendChild(script);
+    fetch("/api/portfolio/projects")
+      .then((res) => res.json())
+      .then((data) => setPortfolioProjects(data))
+      .catch(console.error);
+  }, []);
 
-    links.forEach((linkData) => {
-      const link = document.createElement("link");
-      Object.assign(link, linkData);
-      document.head.appendChild(link);
-    });
-
+  useEffect(() => {
     // Initialize intersection observer
     const observer = new IntersectionObserver(
       (entries) => {
@@ -48,13 +48,6 @@ const HomePage = () => {
 
     return () => {
       observer.disconnect();
-      document.head.removeChild(script);
-      links.forEach(() => {
-        const linkElements = document.head.querySelectorAll(
-          'link[href*="bootstrap-icons"], link[href*="googleapis"]'
-        );
-        linkElements.forEach((link) => document.head.removeChild(link));
-      });
     };
   }, []);
 
@@ -291,95 +284,36 @@ const HomePage = () => {
           </div>
 
           <div className="space-y-6 sm:space-y-8">
-            <div className="bg-white/10 backdrop-blur-lg p-4 sm:p-6 lg:p-8 xl:p-12 rounded-2xl sm:rounded-3xl transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
-              <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
-                <div>
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-[#0047FF] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
-                    <i className="bi bi-laptop text-lg sm:text-2xl lg:text-3xl text-white"></i>
+            {cards.map((card, index) => (
+              <div key={index} className="bg-white/10 backdrop-blur-lg p-4 sm:p-6 lg:p-8 xl:p-12 rounded-2xl sm:rounded-3xl transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
+                <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+                  <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-[#0047FF] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
+                      <i className={`bi ${card.icon} text-lg sm:text-2xl lg:text-3xl text-white`}></i>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4 lg:mb-6">
+                      {card.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 lg:mb-8">
+                      {card.description}
+                    </p>
+                    <Link
+                      to="/services"
+                      className="text-blue-400 font-semibold hover:text-blue-300 text-sm sm:text-base transition-colors"
+                    >
+                      Learn More →
+                    </Link>
                   </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4 lg:mb-6">
-                    Web Development
-                  </h3>
-                  <p className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 lg:mb-8">
-                    Modern, responsive websites and web applications built with
-                    cutting-edge technologies and best practices.
-                  </p>
-                  <Link
-                    to="/services"
-                    className="text-blue-400 font-semibold hover:text-blue-300 text-sm sm:text-base transition-colors"
-                  >
-                    Learn More →
-                  </Link>
-                </div>
-                <div className="bg-white/5 p-3 sm:p-4 lg:p-8 rounded-2xl lg:order-1">
-                  <img
-                    src="/tnngo.png"
-                    alt="Web Development"
-                    className="w-full rounded-xl"
-                  />
+                  <div className="bg-white/5 p-3 sm:p-4 lg:p-8 rounded-2xl lg:order-1">
+                    <img
+                      src={serviceImages[index]?.url || card.fallback}
+                      alt={card.title}
+                      className="w-full rounded-xl"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg p-4 sm:p-6 lg:p-8 xl:p-12 rounded-2xl sm:rounded-3xl transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
-              <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
-                <div className="lg:order-2">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-[#0047FF] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
-                    <i className="bi bi-phone text-lg sm:text-2xl lg:text-3xl text-white"></i>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4 lg:mb-6">
-                    Mobile Apps
-                  </h3>
-                  <p className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 lg:mb-8">
-                    Native iOS and Android applications with exceptional user
-                    experience and performance optimization.
-                  </p>
-                  <Link
-                    to="/services"
-                    className="text-blue-400 font-semibold hover:text-blue-300 text-sm sm:text-base transition-colors"
-                  >
-                    Learn More →
-                  </Link>
-                </div>
-                <div className="bg-white/5 p-3 sm:p-4 lg:p-8 rounded-2xl lg:order-1">
-                  <img
-                    src="/raththam.png"
-                    alt="Mobile Apps"
-                    className="w-full rounded-xl"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg p-4 sm:p-6 lg:p-8 xl:p-12 rounded-2xl sm:rounded-3xl transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
-              <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
-                <div>
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-[#0047FF] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
-                    <i className="bi bi-cloud text-lg sm:text-2xl lg:text-3xl text-white"></i>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4 lg:mb-6">
-                    Cloud Solutions
-                  </h3>
-                  <p className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 lg:mb-8">
-                    Scalable cloud infrastructure, migration services, and
-                    DevOps solutions for modern businesses.
-                  </p>
-                  <Link
-                    to="/services"
-                    className="text-blue-400 font-semibold hover:text-blue-300 text-sm sm:text-base transition-colors"
-                  >
-                    Learn More →
-                  </Link>
-                </div>
-                <div className="bg-white/5 p-3 sm:p-4 lg:p-8 rounded-2xl lg:order-1">
-                  <img
-                    src="/sehatuka.png"
-                    alt="Cloud Solutions"
-                    className="w-full rounded-xl"
-                  />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -401,72 +335,23 @@ const HomePage = () => {
           </div>
 
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 sm:gap-8 space-y-6 sm:space-y-8">
-            <div className="break-inside-avoid bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
-              <img
-                src="/raththam-phone-mock.png"
-                alt="Project"
-                className="w-full"
-              />
-              <div className="p-6 sm:p-8">
-                <h3 className="text-lg sm:text-xl font-bold mb-3">
-                  Raththam Udhavi App
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  Raththam is a life-saving application designed to connect
-                  blood donors and recipients easily.
-                </p>
+            {portfolioProjects.map((project, index) => (
+              <div key={index} className="break-inside-avoid bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full"
+                />
+                <div className="p-6 sm:p-8">
+                  <h3 className="text-lg sm:text-xl font-bold mb-3">
+                    {project.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm sm:text-base">
+                    {project.description}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            <div className="break-inside-avoid bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
-              <img
-                src="/find a bed mockup.png"
-                alt="Project"
-                className="w-full"
-              />
-              <div className="p-6 sm:p-8">
-                <h3 className="text-lg sm:text-xl font-bold mb-3">
-                  FindABed App
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  Healthcare mobile application for hospital bed availability
-                  tracking system.
-                </p>
-              </div>
-            </div>
-
-            <div className="break-inside-avoid bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
-              <img
-                src="/Sehatuka mockup.jpg"
-                alt="Project"
-                className="w-full"
-              />
-              <div className="p-6 sm:p-8">
-                <h3 className="text-lg sm:text-xl font-bold mb-3">
-                  Sehatuka App
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  Comprehensive health and wellness mobile application platform.
-                </p>
-              </div>
-            </div>
-
-            <div className="break-inside-avoid bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
-              <img
-                src="/Sorting Analysis mockup.png"
-                alt="Project"
-                className="w-full"
-              />
-              <div className="p-6 sm:p-8">
-                <h3 className="text-lg sm:text-xl font-bold mb-3">
-                  Sorting Analysis
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  Data visualization and analysis web application for sorting
-                  algorithms.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="text-center mt-12 sm:mt-16 opacity-0 translate-y-12 transition-all duration-700 ease-out reveal">
