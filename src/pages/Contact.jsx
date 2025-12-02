@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+import { submitContact } from "../services/apiService";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -34,35 +35,20 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      await submitContact(formData);
+      setPopupMessage('Message sent successfully!');
+      setIsSuccess(true);
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
       });
-      
-      if (response.ok) {
-        setPopupMessage('Message sent successfully!');
-        setIsSuccess(true);
-        setShowPopup(true);
-        setTimeout(() => setShowPopup(false), 3000);
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          service: "",
-          message: "",
-        });
-      } else {
-        setPopupMessage('Failed to send message. Please try again.');
-        setIsSuccess(false);
-        setShowPopup(true);
-        setTimeout(() => setShowPopup(false), 3000);
-      }
     } catch (error) {
-      console.error('Error:', error);
       setPopupMessage('Failed to send message. Please try again.');
       setIsSuccess(false);
       setShowPopup(true);

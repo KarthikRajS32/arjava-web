@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+import { getProjects } from "../services/apiService";
 
 const Projects = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,13 +20,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("/api/projects");
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch projects");
-        }
-
-        const data = await response.json();
+        const data = await getProjects();
         setProjectItems(data);
         setLoading(false);
       } catch (err) {

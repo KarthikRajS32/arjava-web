@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./components/HomePage";
-import AboutUs from "./components/AboutUs";
-import Services from "./components/Services";
-import Projects from "./components/Projects";
-import Privacy from "./components/Privacy";
-import Contact from "./components/Contact";
+import HomePage from "./pages/HomePage";
+import AboutUs from "./pages/AboutUs";
+import Services from "./pages/Services";
+import Projects from "./pages/Projects";
+import Privacy from "./pages/Privacy";
+import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import useRevealAnimation from "./hooks/useRevealAnimation";
 

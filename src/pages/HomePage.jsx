@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+import { getServiceImages, getPortfolioProjects } from "../services/apiService";
 
 const HomePage = () => {
   const [serviceImages, setServiceImages] = useState([]);
@@ -15,14 +16,12 @@ const HomePage = () => {
   ];
 
   useEffect(() => {
-    fetch('/api/services/images')
-      .then(res => res.json())
+    getServiceImages()
       .then(setServiceImages)
       .catch(console.error);
 
-    fetch("/api/portfolio/projects")
-      .then((res) => res.json())
-      .then((data) => setPortfolioProjects(data))
+    getPortfolioProjects()
+      .then(setPortfolioProjects)
       .catch(console.error);
   }, []);
 
