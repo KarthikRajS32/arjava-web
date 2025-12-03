@@ -35,13 +35,15 @@ const Header = () => {
                   border border-white/40 shadow-md rounded-full 
                   px-4 sm:px-8 py-3 sm:py-4 transition-all duration-300"
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center min-h-[60px]">
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <img
               src={arjavaLogo}
               alt="Arjava"
               className="h-10 sm:h-16 drop-shadow-sm"
+              loading="eager"
+              // style={{ minWidth: '120px' }}
             />
           </div>
 
@@ -49,7 +51,7 @@ const Header = () => {
           <nav className="hidden lg:flex items-center justify-center space-x-8">
             <Link
               to="/"
-              className={`text-sm xl:text-base transition-all m-[0px_0px_0px_24px] ${
+              className={`text-sm xl:text-base transition-all m-[0px_0px_0px_32px] ${
                 isActive("/") ? activeLink : `text-gray-700 ${brandBlueHover}`
               }`}
             >
