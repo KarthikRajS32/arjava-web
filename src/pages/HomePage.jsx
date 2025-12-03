@@ -134,15 +134,20 @@ const HomePage = () => {
 
             {/* RIGHT SIDE IMAGE - Desktop only */}
             <div className="hidden lg:flex relative items-center justify-center h-full w-full opacity-0 translate-y-12 transition-all duration-700 ease-out reveal">
-              <div className="relative rotate-44 top-20 border-[#0047FF] w-120 h-120 rounded-[80px] overflow-hidden border-[0px] shadow-2xl">
-                {/* <div className="absolute inset-0 rotate-45 border-[#0047FF] rounded-[40px] sm:rounded-[60px] lg:rounded-[80px] overflow-hidden shadow-2xl"> */}
+                <div className="relative rotate-44 top-20 w-[480px] h-[480px] rounded-[80px] overflow-hidden shadow-2xl">
                 <img
                   src={heroImg}
                   alt="Digital Marketing Solution"
-                  className="pt-22 w-[298px] h-[362px] transform -rotate-40 scale-150 object-cover"
+                  className="
+                      absolute inset-0
+                      w-full h-full
+                      transform -rotate-40 scale-[1.3]
+                      object-cover
+                      will-change-transform
+                    "
                   loading="eager"
+                  decoding="sync"
                 />
-                {/* </div> */}
               </div>
 
               {/* Stats Badge */}
@@ -292,11 +297,16 @@ const HomePage = () => {
 
           <div className="space-y-6 sm:space-y-8">
             {cards.map((card, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-lg p-4 sm:p-6 lg:p-8 xl:p-12 rounded-2xl sm:rounded-3xl transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
+              <div
+                key={index}
+                className="bg-white/10 backdrop-blur-lg p-4 sm:p-6 lg:p-8 xl:p-12 rounded-2xl sm:rounded-3xl transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal"
+              >
                 <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
                   <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                     <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-[#0047FF] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
-                      <i className={`bi ${card.icon} text-lg sm:text-2xl lg:text-3xl text-white`}></i>
+                      <i
+                        className={`bi ${card.icon} text-lg sm:text-2xl lg:text-3xl text-white`}
+                      ></i>
                     </div>
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4 lg:mb-6">
                       {card.title}
@@ -343,7 +353,10 @@ const HomePage = () => {
 
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 sm:gap-8 space-y-6 sm:space-y-8">
             {portfolioProjects.map((project, index) => (
-              <div key={index} className="break-inside-avoid bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal">
+              <div
+                key={index}
+                className="break-inside-avoid bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal"
+              >
                 <img
                   src={project.image}
                   alt={project.name}
