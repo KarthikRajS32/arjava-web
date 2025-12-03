@@ -139,7 +139,8 @@ const HomePage = () => {
                 <img
                   src={heroImg}
                   alt="Digital Marketing Solution"
-                  className="pt-22 w-[298px] h-[362px] transform -rotate-40 scale-150"
+                  className="pt-22 w-[298px] h-[362px] transform -rotate-40 scale-150 object-cover"
+                  loading="eager"
                 />
                 {/* </div> */}
               </div>
