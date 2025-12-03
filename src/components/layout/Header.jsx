@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import arjavaLogo from "../../assets/arjava logo.png";
 
 const Header = () => {
   const location = useLocation();
@@ -38,7 +39,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <img
-              src="/arjava logo.png"
+              src={arjavaLogo}
               alt="Arjava"
               className="h-10 sm:h-16 drop-shadow-sm"
             />

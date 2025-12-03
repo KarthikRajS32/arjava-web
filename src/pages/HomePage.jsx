@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import { getServiceImages, getPortfolioProjects } from "../services/apiService";
+import heroImg2 from "../assets/img.jpg";
+import heroImg from "../assets/img.jpeg";
+import palaniAnna from "../assets/palanianna.jpeg";
+import saravananAnna from "../assets/Saravanananna.png";
+import karthikAnna from "../assets/KarthikAnna.png";
+import amrishAnna from "../assets/amrishannapic.png";
+import maniAnna from "../assets/manianna.png";
 
 const HomePage = () => {
   const [serviceImages, setServiceImages] = useState([]);
@@ -69,14 +76,14 @@ const HomePage = () => {
           ></div>
           <div className="absolute top-50 left-6 w-50 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 transform -translate-y-1/2 -rotate-32 rounded-3xl overflow-hidden opacity-50">
             <img
-              src="/img.jpg"
+              src={heroImg2}
               alt="Digital Marketing Solution"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="absolute top-160 right-16 w-50 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 transform -translate-y-1/2 rotate-12 rounded-3xl overflow-hidden opacity-60">
             <img
-              src="/img.jpeg"
+              src={heroImg}
               alt="Digital Marketing Solution"
               className="w-full h-full object-cover"
             />
@@ -130,7 +137,7 @@ const HomePage = () => {
               <div className="relative rotate-44 top-20 border-[#0047FF] w-120 h-120 rounded-[80px] overflow-hidden border-[0px] shadow-2xl">
                 {/* <div className="absolute inset-0 rotate-45 border-[#0047FF] rounded-[40px] sm:rounded-[60px] lg:rounded-[80px] overflow-hidden shadow-2xl"> */}
                 <img
-                  src="/img.jpeg"
+                  src={heroImg}
                   alt="Digital Marketing Solution"
                   className="pt-22 w-[298px] h-[362px] transform -rotate-40 scale-150"
                 />
@@ -383,7 +390,7 @@ const HomePage = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal text-center">
               <img
-                src="/palanianna.jpeg"
+                src={palaniAnna}
                 alt="Palani Vairavan"
                 className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 sm:mb-6 object-cover"
               />
@@ -397,7 +404,7 @@ const HomePage = () => {
 
             <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal text-center">
               <img
-                src="/Saravanananna.png"
+                src={saravananAnna}
                 alt="Saravanan Arumugam"
                 className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 sm:mb-6 object-cover"
               />
@@ -409,7 +416,7 @@ const HomePage = () => {
 
             <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal text-center">
               <img
-                src="/KarthikAnna.png"
+                src={karthikAnna}
                 alt="Karthikeyan Rajendran"
                 className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 sm:mb-6 object-cover"
               />
@@ -423,7 +430,7 @@ const HomePage = () => {
 
             <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal text-center">
               <img
-                src="/amrishannapic.png"
+                src={amrishAnna}
                 alt="Amrish KS"
                 className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 sm:mb-6 object-cover"
               />
@@ -435,7 +442,7 @@ const HomePage = () => {
 
             <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-12 reveal text-center">
               <img
-                src="/manianna.png"
+                src={maniAnna}
                 alt="Pitchaimani Rajaram"
                 className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 sm:mb-6 object-cover"
               />

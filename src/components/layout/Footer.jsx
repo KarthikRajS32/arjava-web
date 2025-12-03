@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import arjavaLogo from "../../assets/arjava logo.png";
 
 export default function Footer() {
   const location = useLocation();
@@ -19,7 +20,7 @@ export default function Footer() {
           {/* Logo + Social */}
           <div className="sm:col-span-2 lg:col-span-1">
             <img
-              src="/arjava logo.png"
+              src={arjavaLogo}
               alt="Arjava"
               className="h-8 sm:h-10 lg:h-14 mb-4 sm:mb-6 filter brightness-0 invert"
             />

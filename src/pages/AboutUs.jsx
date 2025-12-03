@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import aboutImg from "../assets/about img.png";
+import storyImg from "../assets/story section.png";
 
 const About = () => {
   useEffect(() => {
@@ -71,7 +73,7 @@ const About = () => {
           ></div>
           <div className="relative rotate-44 top-10 border-[#0047FF] w-60 h-60 md:w-120 md:h-120 rounded-[80px] overflow-hidden border-[0px] shadow-2xl bg-gray-100">
             <img
-              src="/about img.png"
+              src={aboutImg}
               alt="About Arjava"
               className="pt-20 pl-4 w-[256px] h-[306px] transform -rotate-[22deg] scale-150 bg-gray-100"
             />
@@ -95,7 +97,7 @@ const About = () => {
               <div className="relative rotate-44 top-20 border-[#0047FF] w-120 h-120 rounded-[80px] overflow-hidden border-[0px] shadow-2xl bg-gray-100">
                 {/* <div className="absolute inset-0 rotate-45 border-[#0047FF] rounded-[40px] sm:rounded-[60px] lg:rounded-[80px] overflow-hidden shadow-2xl bg-gray-100"> */}
                 <img
-                  src="/about img.png"
+                  src={aboutImg}
                   alt="About Arjava"
                   className="pt-32 pl-4 w-[356px] h-[506px] transform -rotate-[22deg] scale-150 bg-gray-100"
                 />
@@ -232,7 +234,7 @@ const About = () => {
             <div className="opacity-0 translate-x-12 transition-all duration-700 ease-out fade-right">
               <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl">
                 <img
-                  src="/story section.png"
+                  src={storyImg}
                   alt="Arjava Story"
                   className="w-full rounded-xl sm:rounded-2xl"
                 />
